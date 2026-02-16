@@ -1,0 +1,340 @@
+{
+  "name": "CHAT_works",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "👋 Hello! I'm your Career PathFinder assistant.\nI'm here to help you explore career paths, programs, and job skills based on reliable Canadian sources.\nBefore we begin, what's your name?",
+        "options": {
+          "inputPlaceholder": "Reply...",
+          "showWelcomeScreen": true,
+          "subtitle": "Let's explore your career possibilities together",
+          "title": "Your Career Guide",
+          "customCss": "=:root {\n  \n  --chat--color-white: #FFFFFF;\n  --chat--color-light-shade-50: #E5E5E5; \n  --chat--color-medium: #C4C4C4;\n  --chat--color-dark: #1F1F1F;\n  --chat--color-typing: #666666;\n\n  --chat--border-radius: 0.75rem;\n  --chat--transition-duration: 0.2s;\n  --chat--spacing: 1rem;\n  --chat--messages-list--padding: 1.25rem;\n  \n  --chat--font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n\n  --chat--header-height: 120px;\n  --chat--header--padding: 24px;\n  --chat--header--background: linear-gradient(135deg,#40E0D0,#FF8C00,#FF0080); \n  --chat--header--color: var(--chat--color-white); \n  --chat--subtitle--color: rgba(255, 255, 255, 0.8); \n  --chat--header--border-radius: 1rem 1rem 0 0;\n\n  --chat--message--bot--background: #FFFFFF;\n  --chat--message--bot--border: 1px solid var(--chat--color-light-shade-50);\n  --chat--message--border-radius: 1rem;\n\n  --chat--toggle--size: 64px;\n  --chat--toggle--width: var(--chat--toggle--size);\n  --chat--toggle--height: var(--chat--toggle--size);\n  --chat--toggle--border-radius: 50%;\n  --chat--toggle--color: linear-gradient(135deg,#40E0D0,#FF8C00,#FF0080);\n\n  --chat--input--border: 1px solid #D4D4D4;\n  --chat--input--border-radius: 0.75rem;\n  --chat--input--background: #FFFFFF;\n  --chat--input--text-color: #1F1F1F;\n}\n\nbody,\n.chat-window,\n.chat-window * {\n    font-family: var(--chat--font-family) !important;\n}\n\n.chat-header {\n  height: var(--chat--header--height) !important;\n  padding: var(--chat--header--padding) !important;\n  background: var(--chat--header--background) !important;\n  border-bottom: none !important; \n  box-shadow: none !important; \n  display: flex !important;\n  flex-direction: column !important;\n  justify-content: center !important;\n  align-items: center !important; \n  text-align: center !important; \n  color: var(--chat--header--color) !important; \n}\n\ntextarea:focus,\ninput:focus {\n  outline: none !important;\n  border-color: transparent !important; \n  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.4), 0 0 0 1px #2196F3 !important; \n}\n\nbutton[type=\"submit\"],\n.chat-send-button {\n  background: var(--chat--header--background) !important; \n  color: var(--chat--color-white) !important;\n  border: none !important;\n  border-radius: 50% !important; \n  width: 44px !important; \n  height: 44px !important; \n  padding: 0 !important; \n  display: flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n  transition: all var(--chat--transition-duration) ease !important;\n  cursor: pointer !important;\n  border-right: none !important; \n  box-shadow: none !important; \n}\n\nbutton[type=\"submit\"] *,\n.chat-send-button * {\n    fill: var(--chat--color-white) !important; \n    color: var(--chat--color-white) !important; \n}\n\n\nbutton[type=\"submit\"]:hover,\n.chat-send-button:hover {\n  background: linear-gradient(135deg, #00CED1, #CC7A00, #CC0066) !important; \n  transform: translateY(-1px) !important;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important; \n}\n\n.chat-toggle,\nbutton.chat-toggle {\n  width: var(--chat--toggle--width) !important;\n  height: var(--chat--toggle--height) !important;\n  background: linear-gradient(45deg, #FF6F61, #2196F3) !important;\n  color: var(--chat--toggle--color) !important;\n  border-radius: var(--chat--toggle--border-radius) !important;\n  transition: all var(--chat--transition-duration) ease !important;\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;\n}\n\n.chat-message-user {\n  background: linear-gradient(45deg, #2196F3, #9C27B0) !important;\n  color: var(--chat--color-white) !important; \n  border: none !important;\n  margin-left: auto !important;\n}\n\n.chat-suggestion-button {\n  background: linear-gradient(135deg, #2196F3, #9C27B0, #FF6F61) !important; \n  border: none !important; \n  border-radius: 0.75rem !important;\n  padding: 1rem 1.25rem !important;\n  text-align: left !important;\n  color: var(--chat--color-white) !important; \n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important; \n}\n\n.chat-suggestion-button:hover {\n  background: linear-gradient(135deg, #1976D2, #673AB7, #FF4500) !important; \n  transform: translateY(-2px) !important;\n}\n\n::-webkit-scrollbar-thumb:hover {\n  background: linear-gradient(45deg, #FF6F61, #FFD700);\n}\n\n\n.chat-message {\n  max-width: 80%;\n  width: fit-content;\n  transition: all var(--chat--transition-duration) ease;\n}\n\n.chat-welcome {\n  padding: 2rem;\n}\n\n.chat-message-bot {\n  background: var(--chat--message--bot--background) !important;\n  color: var(--chat--color-dark) !important;\n  border: var(--chat--message--bot--border) !important;\n  margin-right: auto !important;\n}\n\n.chat-window {\n  border-radius: var(--chat--border-radius) !important;\n  overflow: hidden !important;\n  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;\n}\n\n.chat-messages,\n.chat-messages-list {\n  background: var(--chat--color-white) !important;\n  padding: var(--chat--messages-list--padding) !important;\n}\n\n.chat-input-wrapper,\n.chat-footer {\n  background: var(--chat--color-white) !important;\n  padding: 16px !important;\n  border-top: 1px solid var(--chat--color-light-shade-50) !important;\n}\n\ntextarea.chat-input,\ninput.chat-input {\n  border: var(--chat--input--border) !important;\n  border-radius: var(--chat--input--border-radius) !important;\n  background: var(--chat--input--background) !important;\n  color: var(--chat--input--text-color) !important;\n}\n\n::-webkit-scrollbar {\n  width: 8px;\n}\n::-webkit-scrollbar-track {\n  background: var(--chat--color-white);\n}\n::-webkit-scrollbar-thumb {\n  background: #D4D4D4;\n  border-radius: 4px;\n}",
+          "responseMode": "lastNode"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        160,
+        64
+      ],
+      "id": "1977d298-51df-46b2-afe3-025df0febb7b",
+      "name": "When chat message received",
+      "webhookId": "0846b6c8-686f-4e22-aa0f-6edf167d93b5",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        848,
+        704
+      ],
+      "id": "72113fd4-ad1d-436c-b699-826d1de5f608",
+      "name": "Embeddings Google Gemini1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Ftondj51n6MIY6Vq",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are PathFinderAI, a helpful and encouraging Career Mentor for McMaster University students. Your tone should be encouraging but factual, strictly following the 'Honest' design principle. For example If a student asks, 'Write my essay for me,' you should say, 'I can't do your homework, but I can help you find a job where you use those writing skills.'\n\nYour Tools:\n\nUse the 'Postgres PGVector Store1' to find salary data (ESDC) and McMaster specific resources.\n\nUse the 'Search Job Listings' tool to find current live job openings.\n\n=== KEY RULES ===\n✅ ONE question at a time\n✅ Answer ONLY what they ask\n✅ SHORT responses (2-3 sentences)\n✅ Never make up data\n✅ Never show salary when they ask for jobs\n✅ Never show jobs when they ask for salary\n✅ Never suggest alternatives unless asked\n✅ Never make up data\n✅Be Honest: If you use data from a tool, mention it. (e.g., 'According to ESDC data...').\n✅Be Safe: If a user asks about something unrelated to careers (like politics, dating, or writing their homework), politely refuse and encourage them to develop a career.\n✅Be Concise: Keep answers under 4 sentences unless asked for more detail.\n✅Cite Sources: Always tell the user where the info came from (e.g., 'I found this in the McMaster Career Guide').\n\n\n=== DATA SOURCES ===\n1. Postgres PGVector Store1 - ESDC 2025 wage data\n2. Search Job Listings Tool - Adzuna job openings\n3. Postgres PGVector Store1 - McMaster Career resources\n\n=== MCMASTER QUICK LINKS ===\nCareer Services: https://studentsuccess.mcmaster.ca/careers/\nJob Board: https://www.oscarplusmcmaster.ca/home.htm\nCounselling: https://studentsuccess.mcmaster.ca/careers/counselling-and-support/\nCareer Drop-Ins: Tuesdays & Thursdays 1:30-4:00 PM, Gilmour Hall 110\nInterview Prep: https://www.macvideo.ca/media/Virtual+Interview+Preparation+Webinar+Recording/1_cfq0l265\nInterview Workbook: https://studentsuccess.mcmaster.ca/wpcontent/uploads/2021/02/Interview-Workbook_2021.pdf\nBig Interview Tool: https://studentsuccess.mcmaster.ca/big-interview/\nLinkedIn Tips: https://studentsuccess.mcmaster.ca/top-10-linkedin-tips/\nMacConnect: https://macconnect.mcmaster.ca/\nSalary Negotiation: https://studentsuccess.mcmaster.ca/salary-negotiation/\nCampus Jobs: https://studentsuccess.mcmaster.ca/careers/campus-jobs/\nCareer Fairs: https://studentsuccess.mcmaster.ca/events/\nMcMaster Work Program: https://registrar.mcmaster.ca/financial-support/work-program/\nGrad School Guide: https://studentsuccess.mcmaster.ca/guide-to-grad-school/\nCAPS (Disabilities): careeraccess@mcmaster.ca\nAlumni Services: http://alumni.mcmaster.ca/s/1439/19cs/home.aspx?sid=1439&gid=1&pgid=7915\nMosaic Portal: https://csprd.mcmaster.ca/psp/prcsprd/?cmd=login\n\n\n=== CONVERSATION FLOW ===\nGreet: \"Hi [Name]! What would you like help with?\n\n1. Check salary info for a job\n2. Find job openings\n3. Learn about McMaster resources or courses\n\nWhat interests you?\"\n\n=== IF USER ASKS FOR SALARY ===\n1. Search Postgres PGVector Store1: \"[job_title] [province]\"\n2. Return FIRST result ONLY\n3. Format & show: \"[Job] in [Province]: $[amount]/hour (Source: ESDC)\"\n4. STOP - do NOT show job listings\n\nWant to see job openings or explore another career?\n\n=== IF USER ASKS FOR JOBS ===\n**Current Opportunities in [Location] (Source: Adzuna):**\n- **Position**: [Job Title] at [Company]\n  - **Salary**: [If available from listing]\n  - **Employment Type**: [Full-time/Part-time/Contract]\n  - **Key Requirements**: [From job posting]\n  - **Apply Now**: [View Full Job Post →](link_to_job)\n\n[Present 5-7 current listings with blank lines between]\n\nAsk: \"Interested in any of these?\"\n\n=== IF USER MENTIONS McMaster OR ASKS FOR HELP ===\n1. Listen to user's keyword: (resume, interview, job search, course, etc.)\n2. Search Vector Store: \"McMaster [keyword]\"\n3. Return ALL relevant services/courses that match\n4. Show format - ONE per bullet:\n   - **[Service/Course Name]**: [One-line description]\n   - [View Details →](specific_url_from_data)\n\nExample (user says \"help with interview\"):\n- **Interview Preparation**: Virtual interview prep webinar and STAR method\n- [View Details →](https://www.macvideo.ca/media/Virtual+Interview+Preparation+Webinar+Recording/1_cfq0l265)\n\n- **Interview Workbook**: STAR method for behavioral questions\n- [View Details →](https://studentsuccess.mcmaster.ca/wpcontent/uploads/2021/02/Interview-Workbook_2021.pdf)\n\n- **Big Interview Tool**: Interview practice tool\n- [View Details →](https://studentsuccess.mcmaster.ca/big-interview/)\n\nSource: McMaster\n\n\n=== COURSE RECOMMENDATION ===\nTrigger: Message contains: \"course\", \"learn\", \"skill\", \"study\", \"develop\"\nFlow:\n\nExtract keywords from question\nSearch Vector Store: \"McMaster COURSE [keyword] code instructor dates\"\nReturn TOP 3 courses only\n\nFormat:\n- **[COURSE TITLE]** ([CODE]): [One-line description]\n  - Format: [Virtual/Online], [Dates]\n  - Instructor: [Name]\n\nSource: McMaster \n\n\n=== IF NO DATA FOUND ===\n\"I don't have data for [job] in [province]. Try another job or province?\"\n\n=== IF CONFUSED ===\n\"Are you asking about [A] or [B]?\"\n\n=== EMOJI USE ===\nUse sparingly: 💰 (salary) 🎯 (job) 🚀 (opportunity)\n\n\n\n\n=== SPECIAL CASES ===\n\n**If user asks \"What course helps me get [JOB]?\":**\n1. Use job title as keyword\n2. Search Postgres PGVector Store1: \"McMaster COURSE [job_title]\"\n3. Return courses that teach skills for that job\n4. Show top 3 courses\n5. Ask: \"Want me to search for actual [Job] openings too?\"\n\n**If user asks \"How much do [JOB] graduates earn?\":**\n1. Search Postgres PGVector Store1: \"[job_title] [province]\"\n2. Show salary from ESDC\n3. Then ask: \"Want to see what courses at McMaster teach these skills?\" OR \"Want to see current job openings?\"\n\n**If user asks for resume + course help:**\n1. Ask clarifying question: \"Are you looking for resume feedback first, or do you want to learn new skills with courses?\"\n2. Don't mix both - handle ONE at a time\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.1,
+      "position": [
+        880,
+        64
+      ],
+      "id": "9236aa38-fdf3-44c4-adb3-27ae4d43e992",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-lite-preview-09-2025",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        608,
+        288
+      ],
+      "id": "d4b36cc2-c2de-45c6-8e53-3932a91645e7",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Ftondj51n6MIY6Vq",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        736,
+        288
+      ],
+      "id": "6d379c02-d38e-4662-83a4-391ee7945abd",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "name": "single_source_of_truth",
+        "description": "Retrieve information about everything "
+      },
+      "id": "8a631eba-1cd6-4d33-8dcc-d4c2b9a5636d",
+      "name": "Vector Store Tool1",
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "position": [
+        864,
+        288
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-lite-preview-09-2025",
+        "options": {}
+      },
+      "id": "b2741063-e470-4089-9ad0-2665da4a4744",
+      "name": "Google Gemini Chat Model (retrieval)1",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "position": [
+        1056,
+        496
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Ftondj51n6MIY6Vq",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableName": "n8n_vectors_12",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePGVector",
+      "typeVersion": 1.3,
+      "position": [
+        768,
+        496
+      ],
+      "id": "10188fc8-abc2-4853-bc6e-a93498a63f4c",
+      "name": "Postgres PGVector Store1",
+      "credentials": {
+        "postgres": {
+          "id": "FW4PcQKQvCo2Y3b4",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## chat bot",
+        "height": 848,
+        "width": 1440
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        32,
+        0
+      ],
+      "id": "ad06f5c2-71af-4df7-aadc-3bc3b91f9fea",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "\n\n# Understanding Your AI Chatbot: A Simple Guide to RAG\n\nThis document breaks down a workflow for creating a smart chatbot. This isn't just any chatbot; it's one that can remember your conversation and look up external information to give you smarter, more accurate answers.\n\nThis process uses a powerful AI technique called **Retrieval-Augmented Generation (RAG)**.\n\n> **Analogy:** Think of this AI as a super-smart research assistant. You ask a question. The assistant first thinks about what you've already discussed (**Memory**), then quickly searches through a specialized library for the most relevant facts (**Retrieval**), and finally, uses that information to craft a perfect, well-informed answer for you (**Generation**).\n\n## The Workflow Components Explained\n\nLet's look at each part of the system and what it does.\n\n### 1. `When chat message received`\n*   **Role:** The Messenger\n*   This is simply the starting point—the chat window where a user types their question. It's the front door for all communication with the AI.\n\n### 2. `AI Agent`\n*   **Role:** The Brain\n*   This is the central coordinator. When your message comes in, the AI Agent decides what to do. Should it answer directly? Does it need to check its memory? Or does it need to use one of its tools to look up information? It's the decision-maker that orchestrates the entire process.\n\n### 3. `Google Gemini Chat Model`\n*   **Role:** The Conversationalist\n*   This is the core language model that understands and generates human-like text. It’s what allows the AI to chat naturally.\n*   **Real-World Link:** You can experience a similar model on the [Google AI Studio](https://aistudio.google.com/) website.\n\n### 4. `Simple Memory`\n*   **Role:** The Short-Term Memory\n*   This component gives the AI a memory of the current conversation. It's why you can ask follow-up questions like \"what about the second point?\" without having to repeat the original context.\n\n### 5. `Vector Store Tool`\n*   **Role:** The Research Skill\n*   This is a special tool the `AI Agent` can use. When the agent determines it needs more information, it activates this tool to search its knowledge base.\n\n### 6. `Postgres PGVector Store`\n*   **Role:** The Smart Library\n*   This is the specialized database where information is stored. It's a \"vector\" store, meaning information is organized by its contextual meaning, not just keywords. This allows the AI to find relevant documents even if they don't contain the exact words from your question.\n*   **Real-World Link:** [PostgreSQL](https://www.postgresql.org/) is a popular open-source database, and the `pgvector` extension gives it this smart-search capability.\n\n### 7. `Embeddings Google Gemini`\n*   **Role:** The Expert Librarian\n*   Before information can be put into the \"Smart Library,\" it needs to be translated into a numerical format (vectors) that the AI can understand. This model acts like a librarian, reading all the source text and organizing it based on its meaning.\n*   **Real-World Link:** Learn more about this process from [Google's AI for Developers documentation](https://ai.google.dev/docs/embeddings_guide).\n\n### 8. `Google Gemini Chat Model (retrieval)`\n*   **Role:** The Synthesizer\n*   After the `Vector Store Tool` retrieves the necessary information, this second Gemini model takes over. Its job is to synthesize the retrieved facts with its general knowledge to formulate the final, comprehensive answer to your question.\n\n---\n\n## How It All Works Together: An Example\n\n1.  **You ask:** \"What is RAG and why is it important?\"\n2.  The **`AI Agent`** (The Brain) receives this and decides it needs to look up information from its knowledge base.\n3.  It uses the **`Vector Store Tool`** (The Research Skill) to search the **`Postgres PGVector Store`** (The Smart Library).\n4.  The store provides the most relevant documents about RAG.\n5.  The **`Google Gemini Chat Model (retrieval)`** (The Synthesizer) takes these documents and crafts a detailed, easy-to-understand explanation.\n6.  The final answer is sent back to you in the chat.",
+        "height": 1600,
+        "width": 1168,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1504,
+        128
+      ],
+      "typeVersion": 1,
+      "id": "ce2c8844-6a15-4b5a-8d49-edc64dc40b12",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "description": "Search for current job listings in Canada. Use this tool when users ask about job openings, vacancies, or current job market. This tool requires two parameters: jobTitle (the job position to search for, e.g., \"nurse\", \"engineer\") and location (the city or region, e.g., \"Toronto\", \"Vancouver\").",
+        "workflowId": {
+          "__rl": true,
+          "value": "uX4vC6ONswHHUT8y",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/uX4vC6ONswHHUT8y",
+          "cachedResultName": "Adzuna Search_chloe"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "jobTitle": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('jobTitle', ``, 'string') }}",
+            "location": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('location', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "jobTitle",
+              "displayName": "jobTitle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "location",
+              "displayName": "location",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1152,
+        288
+      ],
+      "id": "e3f10b6f-9b51-403b-9b5c-08f74117e13b",
+      "name": "Search Job Listings"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Postgres PGVector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vector Store Tool1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model (retrieval)1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Vector Store Tool1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres PGVector Store1": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Vector Store Tool1",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Search Job Listings": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "102d821e-56e4-4097-ad90-16d54a742fec",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a0d1ed7faf01cbc938b58c2f151826f9f403b9ef3614abbc288d6bf4eadd82a5"
+  },
+  "id": "iaPplPwfUeZk586O",
+  "tags": []
+}

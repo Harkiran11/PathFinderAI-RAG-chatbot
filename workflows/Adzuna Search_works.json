@@ -1,0 +1,85 @@
+{
+  "name": "Adzuna Search_works",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "jobTitle"
+            },
+            {
+              "name": "location"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "402ffc2a-c117-4f26-81d5-8f5d3d7bffe0",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.adzuna.com/v1/api/jobs/ca/search/1?app_id=09cafb52&app_key=c5f5e44bc38eb8d7e004fb7fa748929c&results_per_page=10&what={{ $json.jobTitle }}&where={{ $json.location }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "9c17114f-7f16-4f74-9d2c-7ec2bc3de75c",
+      "name": "Adzuna"
+    },
+    {
+      "parameters": {
+        "content": "## Adzuna Search Workflow - Usage Guide\n## What This Workflow Does\n1. Connects to Adzuna Job API to search and retrieve real-time job listings across Canada based on job title and location.\n\n2. When This Workflow is Called\nTriggered by another workflow when user searches for current job openings.\nCall Method: Webhook/Sub-workflow trigger",
+        "height": 272,
+        "width": 480
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        656,
+        80
+      ],
+      "typeVersion": 1,
+      "id": "d95f13b6-dc34-4e49-99be-d0f6f6d33583",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Adzuna",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Adzuna": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "77d7cde2-93af-4c2b-9a55-238de170b969",
+  "meta": {
+    "instanceId": "a0d1ed7faf01cbc938b58c2f151826f9f403b9ef3614abbc288d6bf4eadd82a5"
+  },
+  "id": "uX4vC6ONswHHUT8y",
+  "tags": []
+}
